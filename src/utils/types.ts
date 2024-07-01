@@ -9,6 +9,7 @@ export type TileType = {
 	isStart: boolean;
 	isEnd: boolean;
 	isVisited: boolean;
+	isPath: boolean;
 };
 export type GridType = TileType[][];
 
