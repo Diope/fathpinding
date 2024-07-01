@@ -2,9 +2,37 @@ import { twMerge } from "tailwind-merge";
 import { usePathFinding } from "../hooks/usePathFinding";
 import { MAX_COL, MAX_ROW } from "../utils/constants";
 import { Tile } from "./Tile";
+import { MutableRefObject, useState } from "react";
+import { checkIfStartOrEnd, createNewGrid } from "../utils/helpers";
 
-export function Grid() {
-	const { grid } = usePathFinding();
+export function Grid({
+	isRunningRef,
+}: {
+	isRunningRef: MutableRefObject<boolean>;
+}) {
+	const { grid, setGrid } = usePathFinding();
+	const [isMouseDown, setIsMouseDown] = useState(false);
+
+	const handleMouseDown = (row: number, col: number) => {
+		if (isRunningRef.current || checkIfStartOrEnd(row, col)) return;
+		setIsMouseDown(true);
+		const newGrid = createNewGrid(grid, row, col);
+		console.log(newGrid, "test");
+		setGrid(newGrid);
+	};
+
+	const handleMouseUp = (row: number, col: number) => {
+		if (isRunningRef.current || checkIfStartOrEnd(row, col)) return;
+		setIsMouseDown(false);
+	};
+
+	const handleMouseEnter = (row: number, col: number) => {
+		if (isRunningRef.current || checkIfStartOrEnd(row, col)) return;
+		if (isMouseDown) {
+			const newGrid = createNewGrid(grid, row, col);
+			setGrid(newGrid);
+		}
+	};
 	return (
 		<div
 			className={twMerge(
@@ -19,10 +47,11 @@ export function Grid() {
 				}] w-[${MAX_COL * 7}px]`
 			)}
 		>
-			{grid.map((row, idx) => (
+			{grid.map((r, idx) => (
 				<div key={idx} className="flex">
-					{row.map((tile, idx) => {
-						const { isStart, isEnd, isVisited, isWall, isPath } = tile;
+					{r.map((tile, idx) => {
+						const { col, row, isStart, isEnd, isVisited, isWall, isPath } =
+							tile;
 						return (
 							<Tile
 								key={idx}
@@ -33,6 +62,9 @@ export function Grid() {
 								isVisited={isVisited}
 								isWall={isWall}
 								isPath={isPath}
+								handleMouseDown={() => handleMouseDown(row, col)}
+								handleMouseEnter={() => handleMouseEnter(row, col)}
+								handleMouseUp={() => handleMouseUp(row, col)}
 							/>
 						);
 					})}

@@ -27,3 +27,14 @@ const createRow = (row: number, startTile: TileType, endTile: TileType) => {
 	// console.log(currentRow, "I AM A CREATED ROW HO HO");
 	return currentRow;
 };
+
+export const checkIfStartOrEnd = (row: number, col: number) => {
+	return (row === 1 && col === 1) || (row === MAX_ROW - 2 && col === MAX_COL - 2);
+};
+
+export const createNewGrid = (grid: GridType, row: number, col: number) => {
+    const newGrid = grid.slice();
+    const newTile = {...newGrid[row][col], isWall: !newGrid[row][col].isWall};
+    newGrid[row][col] = newTile;
+    return newGrid;
+}
