@@ -11,3 +11,5 @@ export type TileType = {
 	isVisited: boolean;
 };
 export type GridType = TileType[][];
+
+export type SpeedType = 4 | 2 | 1;
