@@ -8,7 +8,10 @@ export default {
 			keyframes: {
 				wall: {
 					"0%": {
-						transform: "scale(0.7)",
+						transform: "scale(0.5)",
+					},
+					"50%": {
+						transform: "scale(1.5)",
 					},
 					"100%": {
 						transform: "scale(1)",

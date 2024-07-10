@@ -17,6 +17,7 @@ const createRow = (row: number, startTile: TileType, endTile: TileType) => {
 			row,
 			col,
 			isWall: false,
+			isPath: false,
 			isVisited: false,
 			steps: Infinity,
 			isStart: row === startTile.row && col === startTile.col,
@@ -46,7 +47,7 @@ export const isEqual = (a: TileType, b: TileType) => {
 };
 
 export const isRowAndColEqual = (row: number, col: number, tile: TileType) => {
-	return row === tile.row && col === tile.col;
+	return row === tile.row && col === tile.col; // 
 };
 
 export const algoSleep = (ms: number) => {

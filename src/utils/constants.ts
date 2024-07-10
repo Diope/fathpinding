@@ -1,7 +1,7 @@
 import { MazeType, SpeedType } from "./types";
 
-export const MAX_COL = 50;
-export const MAX_ROW = 50;
+export const MAX_COL = 49;
+export const MAX_ROW = 39;
 export const MAX_TILES = MAX_COL * MAX_ROW;
 
 export const START_TILE_CONFIG = {

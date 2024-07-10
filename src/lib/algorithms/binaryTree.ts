@@ -24,11 +24,13 @@ export const binaryTree = async (
 	}
 
 	for (let row = 1; row < MAX_ROW; row += 2) {
+		// starting from odd rows
 		for (let col = 1; col < MAX_COL; col += 2) {
 			if (row === MAX_ROW - 2 && col === MAX_COL - 2) {
-				console.log("greetings from a binary tree in a galaxy far far away");
+				//
+				// console.log("greetings from a binary tree in a galaxy far far away");
 				continue;
-			} else if ((row = MAX_ROW - 2)) {
+			} else if (row === MAX_ROW - 2) {
 				await destroyWall(grid, row, col, 1, speed);
 			} else if (col === MAX_COL - 2) {
 				await destroyWall(grid, row, col, 0, speed);
